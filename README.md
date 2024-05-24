@@ -1,5 +1,8 @@
 # ![SimplifyPath.js](assets/simplify-path-js.png) SimplifyPath.js
 
+[![npm version](https://img.shields.io/npm/v/simplify-path-js.svg?style=flat)](https://www.npmjs.com/package/simplify-path-js)
+[![Coverage Status](https://img.shields.io/coveralls/ignlg/simplify-path-js/main.svg?style=flat)](https://coveralls.io/github/ignlg/simplify-path-js?branch=main)
+
 **SimplifyPath.js** is a powerful TypeScript library designed to **simplify paths or surfaces between 2 and N dimensions efficiently.** Inspired by the renowned `simplify.js`, this library provides developers with advanced algorithms for data simplification, making it **ideal for optimizing graphics, geographical data, and more.**
 
 Whether you're working with 2D maps, 3D models, or high-dimensional datasets, **SimplifyPath.js helps you reduce complexity while preserving essential details.** This library is actively used in high-performance production environments, ensuring reliability and speed for demanding applications.
@@ -14,6 +17,10 @@ Whether you're working with 2D maps, 3D models, or high-dimensional datasets, **
 - 100% test coverage for reliability
 
 Available on [GitHub](https://github.com/ignlg/simplify-path-js) and [NPM](https://www.npmjs.com/package/simplify-path-js) for seamless integration into your projects.
+
+## Documentation
+
+For detailed documentation and examples, please refer to the [API Reference](https://ignlg.github.io/simplify-path-js/).
 
 ## Future Improvements
 
