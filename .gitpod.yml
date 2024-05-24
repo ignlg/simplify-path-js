@@ -1,0 +1,8 @@
+tasks:
+  - init: |
+      touch /tmp/.npm-lock
+      npm ci
+      rm /tmp/.npm-lock
+    command: npm run start
+  - init: sleep 1 && while [ -f /tmp/.npm-lock ]; do sleep 1; done
+    command: npm run test:watch
