@@ -83,7 +83,7 @@
   "name": "simplify-path-js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ignlg/heap-js.git"
+    "url": "git+ssh://git@github.com/ignlg/simplify-path-js.git"
   },
   "scripts": {
     "benchmark": "node benchmark/benchmark.js",
