@@ -5,10 +5,10 @@ import sourceMaps from 'rollup-plugin-sourcemaps';
 
 import pkg from './package.json' with { type: 'json' };
 
-const libraryName = 'SimplifyPath';
+const libraryName = 'simplify-path';
 
 export default {
-  input: `compiled/${libraryName}.js`,
+  input: `compiled/${libraryName}.class.js`,
   output: [
     { file: pkg.main, name: camelCase(libraryName), format: 'umd', exports: 'named' },
     { file: pkg.module, name: camelCase(libraryName), format: 'es', exports: 'named' },

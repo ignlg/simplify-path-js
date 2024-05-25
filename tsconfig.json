@@ -16,9 +16,9 @@
     "target": "es5",
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src", "src/SimplifyPath.spec.ts"],
+  "include": ["src"],
   "typedocOptions": {
-    "entryPoints": ["src/SimplifyPath.ts"],
+    "entryPoints": ["src/simplify-path.class.ts"],
     "out": "docs",
     "theme": "default"
   }

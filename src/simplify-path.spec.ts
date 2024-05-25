@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SimplifyPath } from './SimplifyPath';
+import { SimplifyPath } from './simplify-path.class';
+
+const randomSigned = (max: number) => Math.random() * max * (Math.random() < 0.5 ? -1 : 1);
 
 const cases = [
   {
-    name: 'empty path',
+    name: 'an empty path',
     path: [],
     tolerance: 1,
     simplified: [],
@@ -68,7 +70,7 @@ const cases = [
     ],
   },
   {
-    name: 'three 2-dimensional points forming a triangle with tolerance 0.5',
+    name: 'three 2-dimensional points forming a triangle with low tolerance',
     path: [
       { x: 0, y: 0 },
       { x: 1, y: 0 },
@@ -82,7 +84,7 @@ const cases = [
     ],
   },
   {
-    name: 'six 2-dimensional points forming a triangle with tolerance 1',
+    name: 'six 2-dimensional points forming a triangle with high tolerance',
     path: [
       { x: 0, y: 0 },
       { x: 1, y: 0 },
@@ -98,7 +100,7 @@ const cases = [
     ],
   },
   {
-    name: 'five 2-dimensional points forming a sin wave with tolerance 1',
+    name: 'five 2-dimensional points forming a sin wave with normal tolerance',
     path: Array.from({ length: 5 }, (_, i) => ({ x: i, y: Math.sin(i) })),
     tolerance: 1,
     simplified: [
@@ -108,7 +110,7 @@ const cases = [
     ],
   },
   {
-    name: 'one hundred 2-dimensional points forming a sin wave with tolerance 10',
+    name: 'one hundred 2-dimensional points forming a sin wave with high tolerance',
     path: Array.from({ length: 100 }, (_, i) => ({ x: i, y: Math.sin(i) })),
     tolerance: 10,
     simplified: [
@@ -117,19 +119,49 @@ const cases = [
     ],
   },
   {
-    name: 'one hundred 2-dimensional points with complex head and a line',
+    name: 'one hundred 2-dimensional points with complex head',
     path: (() => {
       const arr = Array.from({ length: 100 }, (_, i) => ({
-        x: i <= 20 && i % 2 !== 0 ? 0.5 : i,
-        y: i <= 20 ? 0.5 : i,
+        x: i <= 50 && i % 2 !== 0 ? 0.5 : i,
+        y: i <= 50 ? 0.5 : i,
       }));
       return arr;
     })(),
     tolerance: 1,
     simplified: [
       { x: 0, y: 0.5 },
-      { x: 20, y: 0.5 },
-      { x: 21, y: 21 },
+      { x: 50, y: 0.5 },
+      { x: 51, y: 51 },
+      { x: 99, y: 99 },
+    ],
+  },
+  {
+    name: 'one hundred 2-dimensional noise',
+    path: (() => {
+      const arr = Array.from({ length: 100 }, (_, i) => ({
+        x: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+        y: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+      }));
+      return arr;
+    })(),
+    tolerance: 1,
+    simplified: [
+      { x: 0, y: 0 },
+      { x: 99, y: 99 },
+    ],
+  },
+  {
+    name: 'one hundred 2-dimensional noise on a line',
+    path: (() => {
+      const arr = Array.from({ length: 100 }, (_, i) => ({
+        x: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+        y: i,
+      }));
+      return arr;
+    })(),
+    tolerance: 0.1,
+    simplified: [
+      { x: 0, y: 0 },
       { x: 99, y: 99 },
     ],
   },
@@ -170,7 +202,7 @@ const cases = [
     ],
   },
   {
-    name: 'five 3-dimensional points forming a pyramid with tolerance 1',
+    name: 'five 3-dimensional points forming a pyramid with high tolerance',
     path: [
       { x: 0, y: 0, z: 0 },
       { x: 1, y: 0, z: 0 },
@@ -185,7 +217,7 @@ const cases = [
     ],
   },
   {
-    name: 'five 3-dimensional points forming a pyramid with tolerance 0.5',
+    name: 'five 3-dimensional points forming a pyramid with low tolerance',
     path: [
       { x: 0, y: 0, z: 0 },
       { x: 1, y: 0, z: 0 },
@@ -200,6 +232,38 @@ const cases = [
       { x: 0, y: 1, z: 0 },
       { x: 0, y: 0, z: 1 },
       { x: 1, y: 1, z: 1 },
+    ],
+  },
+  {
+    name: 'one hundred 3-dimensional noise',
+    path: (() => {
+      const arr = Array.from({ length: 100 }, (_, i) => ({
+        x: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+        y: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+        z: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+      }));
+      return arr;
+    })(),
+    tolerance: 1,
+    simplified: [
+      { x: 0, y: 0, z: 0 },
+      { x: 99, y: 99, z: 99 },
+    ],
+  },
+  {
+    name: 'one hundred 3-dimensional noise on a line',
+    path: (() => {
+      const arr = Array.from({ length: 100 }, (_, i) => ({
+        x: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+        y: i,
+        z: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+      }));
+      return arr;
+    })(),
+    tolerance: 0.3,
+    simplified: [
+      { x: 0, y: 0, z: 0 },
+      { x: 99, y: 99, z: 99 },
     ],
   },
   // 4-dimensional points
@@ -239,6 +303,23 @@ const cases = [
       { x: 0.5, y: 0.5, z: 0.5, w: 0.5 },
     ],
   },
+  {
+    name: 'one hundred 4-dimensional noisy points',
+    path: (() => {
+      const arr = Array.from({ length: 100 }, (_, i) => ({
+        x: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+        y: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+        z: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+        w: i > 0 && i < 99 ? i + randomSigned(0.1) : i,
+      }));
+      return arr;
+    })(),
+    tolerance: 200,
+    simplified: [
+      { x: 0, y: 0, z: 0, w: 0 },
+      { x: 99, y: 99, z: 99, w: 99 },
+    ],
+  },
 ];
 
 describe('simplify', () => {
@@ -246,7 +327,8 @@ describe('simplify', () => {
     jest.clearAllMocks();
   });
   it('should crash if dimensions are less than 2', () => {
-    expect(() => new SimplifyPath(['x']).simplify([{ x: 0 }], 1)).toThrow();
+    expect(() => new SimplifyPath([]).simplify([{ x: 0, y: 0 }], 1)).toThrow();
+    expect(() => new SimplifyPath(['x']).simplify([{ x: 0, y: 0 }], 1)).toThrow();
   });
 
   for (const { name, path, tolerance, hq, simplified } of cases) {
