@@ -8,9 +8,6 @@ export type PointXYZ = Point<{
     y: number;
     z?: number;
 }, 'x' | 'y' | 'z'>;
-export interface SimplifyFn<T, P extends keyof T> {
-    (points: Point<T, P>[], tolerance?: number, highestQuality?: boolean): T[];
-}
 export declare class SimplifyPath<T = PointXYZ, P extends keyof T = any> {
     /**
      * Properties of the point object as x, y, z, etc.
@@ -39,6 +36,14 @@ export declare class SimplifyPath<T = PointXYZ, P extends keyof T = any> {
     protected simplifyDouglasPeuckerStep(points: Point<T, P>[], first: number, last: number, sqTolerance: number, simplified: Point<T, P>[]): void;
     /** Simplification using Ramer-Douglas-Peucker algorithm */
     protected simplifyRamerDouglasPeucker(points: Point<T, P>[], sqTolerance: number): Point<T, P>[];
-    /** Both algorithms combined for awesome performance */
-    simplify: SimplifyFn<T, P>;
+    /**
+     * Simplify an array of points with an optional tolerance.
+     * @param points Array of points to simplify.
+     * @param tolerance Tolerance in squared units.
+     * @param highestQuality Flag to enable highest quality simplification.
+     * @returns Simplified array of points.
+     * @example
+     * const simplified = simplifyPath.simplify([{ x: 0, y: 0 }, { x: 1, y: 1 }, { x: 2, y: 2 }], 1);
+     */
+    simplify: (points: Point<T, P>[], tolerance?: number, highestQuality?: boolean) => T[];
 }

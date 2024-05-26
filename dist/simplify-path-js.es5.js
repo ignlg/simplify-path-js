@@ -34,7 +34,15 @@ var SimplifyPath = /** @class */ (function () {
     function SimplifyPath(properties) {
         var _a, _b, _c, _d;
         var _this = this;
-        /** Both algorithms combined for awesome performance */
+        /**
+         * Simplify an array of points with an optional tolerance.
+         * @param points Array of points to simplify.
+         * @param tolerance Tolerance in squared units.
+         * @param highestQuality Flag to enable highest quality simplification.
+         * @returns Simplified array of points.
+         * @example
+         * const simplified = simplifyPath.simplify([{ x: 0, y: 0 }, { x: 1, y: 1 }, { x: 2, y: 2 }], 1);
+         */
         this.simplify = function (points, tolerance, highestQuality) {
             if (tolerance === void 0) { tolerance = 1; }
             if (highestQuality === void 0) { highestQuality = false; }
@@ -148,7 +156,6 @@ var SimplifyPath = /** @class */ (function () {
         d.forEach(function (di, i) { return (vp[i] -= vp[i]); });
         return d.reduce(function (acc, di) { return acc + di * di; }, 0);
     };
-    // rest of the code doesn't care about point format
     /** Basic distance-based simplification */
     SimplifyPath.prototype.simplifyRadialDist = function (points, sqTolerance) {
         var prevPoint = points[0];
