@@ -90,7 +90,6 @@
     "url": "git+ssh://git@github.com/ignlg/simplify-path-js.git"
   },
   "scripts": {
-    "benchmark": "node benchmark/benchmark.js",
     "build": "tsc --project tsconfig.build.json && rollup -c && rimraf compiled && typedoc",
     "lint": "eslint --fix 'src/**/*.ts'",
     "prebuild": "rimraf dist",
