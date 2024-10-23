@@ -19,7 +19,7 @@
   ],
   "main": "dist/simplify-path-js.umd.js",
   "module": "dist/simplify-path-js.es5.js",
-  "types": "dist/types/SimplifyPath.d.ts",
+  "types": "dist/types/simplify-path.class.d.ts",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-node-resolve": "^15.2.3",
