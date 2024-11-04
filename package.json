@@ -101,5 +101,5 @@
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
     "test:watch": "jest --watch"
   },
-  "version": "1.0.1"
+  "version": "1.0.2"
 }
